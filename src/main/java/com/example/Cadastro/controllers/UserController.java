@@ -33,11 +33,6 @@ public class UserController {
     @GetMapping(value = "/searchName")
     public ResponseEntity<List<User>> findByName(@RequestParam String name) {
 
-        /*
-        antes eu tava usando uma função ENORME, sem necessidade alguma, usando collect e mais coisas
-        descobri que eu podia criar no userrepoistory uma classe de find
-        */
-
         List<User> usersFiltradosName = repository.findByLoginContaining(name);
 
         if (!usersFiltradosName.isEmpty()) {
@@ -50,10 +45,8 @@ public class UserController {
     @GetMapping(value = "/searchID")
     public ResponseEntity<Optional<User>> findByID(@RequestParam UUID id) {
 
-        //tive que usar o optional, por que indico que tem a possibilidade do valor na oexistir
-
         Optional<User> usersFiltrados = repository.findById(id);
-        
+
         if (!usersFiltrados.isEmpty()) {
             return new ResponseEntity<>(usersFiltrados, HttpStatus.OK); //retorna os filtrados
         } else {
@@ -63,11 +56,6 @@ public class UserController {
 
     @DeleteMapping(value = "/delete")
     public ResponseEntity<Void> deleteUser(@RequestParam String name) {
-
-        /*
-        tentei utilizar aqui o método searchUser, mas não consigo pois ele
-        retorna um responseEntity como valor
-         */
 
         List<User> usersToRemove = repository.findByLoginContaining(name);
 

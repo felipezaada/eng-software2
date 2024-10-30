@@ -2,7 +2,6 @@ package com.example.Cadastro.models;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.UuidGenerator;
 
 import java.util.UUID;
 
@@ -14,12 +13,13 @@ import java.util.UUID;
 @Entity
 @Table(name = "tb_city")
 public class City {
-    @UuidGenerator(style = UuidGenerator.Style.RANDOM)
+
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-    @Column(nullable = false)
     private String name;
-    @ManyToOne // um estado tem muitas cidades, muitas cidades tem um estado
-    @JoinColumn(name = "state_id", nullable = false) // tive que procurar isso, não sabia como fazer
+    @ManyToOne
+    @JoinColumn(name = "state_id", nullable = false)
     private State state;
+
 }
