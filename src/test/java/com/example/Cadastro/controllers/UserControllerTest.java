@@ -2,6 +2,7 @@ package com.example.Cadastro.controllers;
 
 import com.example.Cadastro.models.User;
 import com.example.Cadastro.repositories.UserRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -25,6 +26,27 @@ class UserControllerTest {
     @Mock
     private UserRepository userRepository;
 
+    private User user;
+    private User user1;
+
+    @BeforeEach
+    void rodarAntes() {
+
+        // instanciei e depois atribui os valores pra gerar o ID automatico
+
+        user = new User();
+        user.setName("Felipe");
+        user.setLogin("Felipe2024");
+        user.setPassword("1428");
+        user.setActive(true);
+
+        user1 = new User();
+        user1.setName("Eduardo");
+        user1.setLogin("Eduardo2024");
+        user1.setPassword("1428");
+        user1.setActive(true);
+    }
+
     private void verificarID(ResponseEntity<Optional<User>> response, String name){
         assertNotNull(response);
         assertNotNull(response.getBody());
@@ -45,12 +67,6 @@ class UserControllerTest {
 
     @Test
     public void findAll() {
-        User user = new User(); // fiz separado por UUID ser criado automaticakmente
-        user.setName("Felipe");
-        user.setLogin("Felipe2024");
-        user.setPassword("1428");
-        user.setActive(true);
-
         Mockito.when(userRepository.findAll()).thenReturn(List.of(user));
         ResponseEntity<List<User>> response = userController.findAll();
         verificarNome(response, user.getName());
@@ -58,19 +74,6 @@ class UserControllerTest {
 
     @Test
     public void findById() {
-        User user = new User();
-        user.setId(UUID.randomUUID()); // Gera um UUID
-        user.setName("Felipe");
-        user.setLogin("Felipe2024");
-        user.setPassword("1428");
-        user.setActive(true);
-
-        User user1 = new User();
-        user1.setId(UUID.randomUUID()); // Gera um UUID
-        user1.setName("Eduardo");
-        user1.setLogin("Eduardo2024");
-        user1.setPassword("1428");
-        user1.setActive(true);
 
         UUID UUID1 = user.getId();
         UUID UUID2 = user1.getId();
@@ -86,18 +89,6 @@ class UserControllerTest {
 
     @Test
     public void findByName(){
-        User user = new User();
-        user.setName("Felipe");
-        user.setLogin("Felipe2024");
-        user.setPassword("1428");
-        user.setActive(true);
-
-        User user1 = new User();
-        user1.setName("Eduardo");
-        user1.setLogin("Eduardo2024");
-        user1.setPassword("1428");
-        user1.setActive(true);
-
         Mockito.when(userRepository.findByNameContaining(user.getName())).thenReturn(List.of(user));
         ResponseEntity<List<User>> response = userController.findByName("Felipe");
         verificarNome(response, "Felipe");

@@ -38,7 +38,7 @@ public class UserController {
         if (!usersFiltradosName.isEmpty()) {
             return new ResponseEntity<>(usersFiltradosName, HttpStatus.OK); //retorna os filtrados
         } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
     
@@ -50,7 +50,7 @@ public class UserController {
         if (!usersFiltrados.isEmpty()) {
             return new ResponseEntity<>(usersFiltrados, HttpStatus.OK); //retorna os filtrados
         } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
