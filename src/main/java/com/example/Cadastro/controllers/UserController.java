@@ -33,7 +33,7 @@ public class UserController {
     @GetMapping(value = "/searchName")
     public ResponseEntity<List<User>> findByName(@RequestParam String name) {
 
-        List<User> usersFiltradosName = repository.findByLoginContaining(name);
+        List<User> usersFiltradosName = repository.findByNameContaining(name);
 
         if (!usersFiltradosName.isEmpty()) {
             return new ResponseEntity<>(usersFiltradosName, HttpStatus.OK); //retorna os filtrados
@@ -55,9 +55,9 @@ public class UserController {
     }
 
     @DeleteMapping(value = "/delete")
-    public ResponseEntity<Void> deleteUser(@RequestParam String name) {
+    public ResponseEntity<Void> deleteUser(@RequestParam String login) {
 
-        List<User> usersToRemove = repository.findByLoginContaining(name);
+        List<User> usersToRemove = repository.findByLoginContaining(login);
 
         if (usersToRemove.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
