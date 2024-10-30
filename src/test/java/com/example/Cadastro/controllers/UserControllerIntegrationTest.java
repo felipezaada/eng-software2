@@ -32,7 +32,7 @@ class UserControllerIntegrationTest {
         user = new User();
         user.setName("Felipe");
         user.setLogin("Felipe2024");
-        user.setPassword("142856");
+        user.setPassword("123456");
         user.setActive(true);
         userRepository.save(user);
     }
@@ -57,7 +57,7 @@ class UserControllerIntegrationTest {
 
     @Test
     void testPostUsers() throws Exception {
-        String userJSON = "{\"name\":\"Felipe Eduardo\", \"login\":\"Felipe2025\", \"password\":\"245656\", \"active\":true}";
+        String userJSON = "{\"name\":\"Felipe Eduardo\", \"login\":\"Felipe2025\", \"password\":\"123456\", \"active\":true}";
         mockMvc.perform(post("/user/post")
                         .contentType(MediaType.APPLICATION_JSON) // falar que é JSON (quebrei a cabeça dms nisso, fazer o json fake)
                         .content(userJSON)) // enviar

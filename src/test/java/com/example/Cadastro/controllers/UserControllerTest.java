@@ -37,13 +37,13 @@ class UserControllerTest {
         user = new User();
         user.setName("Felipe");
         user.setLogin("Felipe2024");
-        user.setPassword("1428");
+        user.setPassword("123456");
         user.setActive(true);
 
         user1 = new User();
         user1.setName("Eduardo");
         user1.setLogin("Eduardo2024");
-        user1.setPassword("1428");
+        user1.setPassword("123456");
         user1.setActive(true);
     }
 
